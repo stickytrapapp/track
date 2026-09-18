@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Your Sticky Trap order</title>
+<style>html,body{margin:0;background:#050505;color:#fff;font:16px/1.5 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.w{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+.b{font-weight:900;letter-spacing:.06em;font-size:14px;color:#FF1FA2;margin-bottom:10px}
+a{color:#12C4FF;font-weight:700}.m{color:#9a9aa8;font-size:14px;margin-top:18px}</style>
+</head><body><div class="w"><div class="b">THE STICKY TRAP</div><div id="msg">Opening your order&hellip;</div>
+<div class="m" id="fb"></div></div>
+<script>
+/* track.thestickytrap.app - the tracker's front door (2026-09-18). The tracker itself lives at thestickytrap.app/track/ (same origin as the
+   app's push notifications and service worker), so this page just forwards, keeping the order code + token from the QR / email link.
+   Also accepts a bare code in the path: track.thestickytrap.app/ST-K3F9 -> /track/?o=ST-K3F9 (the page then asks for the email). */
+(function(){
+  var q=new URLSearchParams(location.search), path=location.pathname.replace(/^\/+|\/+$/g,'');
+  if(!q.get('o') && /^[A-Za-z0-9-]{4,24}$/.test(path)) q.set('o', path.toUpperCase());
+  var dest='https://thestickytrap.app/track/'+(q.toString()?('?'+q.toString()):'')+location.hash;
+  document.getElementById('fb').innerHTML='If nothing happens, <a href="'+dest.replace(/"/g,'&quot;')+'">tap here</a>.';
+  location.replace(dest);
+})();
+</script></body></html>
