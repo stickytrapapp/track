@@ -6,8 +6,7 @@
 .w{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
 .b{font-weight:900;letter-spacing:.06em;font-size:14px;color:#FF1FA2;margin-bottom:10px}
 a{color:#12C4FF;font-weight:700}.m{color:#9a9aa8;font-size:14px;margin-top:18px}</style>
-</head><body><div class="w"><div class="b">THE STICKY TRAP</div><div id="msg">Opening your order&hellip;</div>
-<div class="m" id="fb"></div></div>
+</head><body><div class="w"><img src="https://thestickytrap.app/icons/icon-192.png" alt="" width="72" height="72" style="border-radius:16px"><div class="m" id="fb" style="min-height:22px"></div></div>
 <script>
 /* track.thestickytrap.app - the tracker's front door (2026-09-18). The tracker itself lives at thestickytrap.app/track/ (same origin as the
    app's push notifications and service worker), so this page just forwards, keeping the order code + token from the QR / email link.
@@ -16,7 +15,7 @@ a{color:#12C4FF;font-weight:700}.m{color:#9a9aa8;font-size:14px;margin-top:18px}
   var q=new URLSearchParams(location.search), path=location.pathname.replace(/^\/+|\/+$/g,'');
   if(!q.get('o') && /^[A-Za-z0-9-]{4,24}$/.test(path)) q.set('o', path.toUpperCase());
   var dest='https://thestickytrap.app/track/'+(q.toString()?('?'+q.toString()):'')+location.hash;
-  document.getElementById('fb').innerHTML='If nothing happens, <a href="'+dest.replace(/"/g,'&quot;')+'">tap here</a>.';
   location.replace(dest);
+  setTimeout(function(){ document.getElementById('fb').innerHTML='Opening your order&hellip; <a href="'+dest.replace(/"/g,'&quot;')+'">tap here</a> if it does not.'; },2500);   /* only if the hop is slow - no error-looking text on a normal open */
 })();
 </script></body></html>
